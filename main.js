@@ -1,7 +1,8 @@
 class Hashmap {
   constructor() {
-    this.loadFactor = null;
-    this.capacity = null;
+    this.loadFactor = 0.75;
+    this.capacity = 16;
+    this.array = [];
   }
   hash(key) {
     let hashCode = 0;
@@ -11,4 +12,14 @@ class Hashmap {
     }
     return hashCode;
   }
+  set(key, value) {
+    let hashCode = this.hash(key);
+    this.array[hashCode] = [key, value];
+  }
 }
+
+const test = new Hashmap();
+test.set('hello', 'mark');
+test.set('bye', 'stephen')
+test.set('fruit', 'banana')
+console.log(test.array);
