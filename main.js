@@ -103,13 +103,17 @@ class Hashmap {
     }
     return this.findPrev(node.nextNode)
   }
-  length() {
+  findFilledSpots() {
     let filledSpots = [];
     for (let i = 0; i < this.capacity; i += 1) {
       if (this.array[i] !== null && this.array[i] !== undefined) {
         filledSpots.push(i);
       }
     }
+    return filledSpots;
+  }
+  length() {
+    let filledSpots = this.findFilledSpots();
     let totalNodes = 0;
     // Iterate through each filled spot of the array
     for (let spot of filledSpots) {
@@ -126,13 +130,7 @@ class Hashmap {
     return 1 + this.countNodes(head.nextNode);
   }
   clear() {
-    let filledSpots = [];
-    for (let i = 0; i < this.capacity; i += 1) {
-      if (this.array[i] !== null && this.array[i] !== undefined) {
-        filledSpots.push(i);
-      }
-    }
-  
+    let filledSpots = this.findFilledSpots();  
     for (let spot of filledSpots) {
       let head = this.array[spot];
       let currentPointer = head;
@@ -161,6 +159,6 @@ test.set('rama', 'mark');
 test.set('sita', 'stephen');
 test.set('teacher', 'james');
 test.set('fruit', 'apple');
-console.log(test);
+console.log(test.length());
 test.clear();
-console.log(test);
+console.log(test.length());
