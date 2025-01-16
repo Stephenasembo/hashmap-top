@@ -18,7 +18,16 @@ class Hashmap {
     // Check if spot is filled
     if (!this.array[hashCode]) {
       this.array[hashCode] = newNode;
+    } else {
+      let lastNode = this.findLastNode(this.array[hashCode]);
+      lastNode.nextNode = newNode;
     }
+  }
+  findLastNode(node) {
+    if (node.nextNode === null) {
+      return node;
+    }
+    return this.findLastNode(node.nextNode);
   }
 }
 
@@ -30,5 +39,7 @@ class Node {
 }
 
 const test = new Hashmap();
-test.set('student', 'Stephen');
+test.set('student');
+test.set('rama');
+test.set('sita');
 console.log(test);
