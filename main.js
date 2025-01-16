@@ -149,7 +149,7 @@ class Hashmap {
     let filledSpots = this.findFilledSpots();
     let keysArray = [];
     for (let spot of filledSpots) {
-      keysArray = this.findKeys(this.array[spot], keysArray);
+      this.findKeys(this.array[spot], keysArray);
     }
     return keysArray;
   }
@@ -159,6 +159,21 @@ class Hashmap {
     }
     array.push(head.key);
     return this.findKeys(head.nextNode, array);
+  }
+  values() {
+    let filledSpots = this.findFilledSpots();
+    let valuesArray = [];
+    for (let spot of filledSpots) {
+      this.findValues(this.array[spot], valuesArray);
+    }
+    return valuesArray;
+  }
+  findValues(head, array) {
+    if (head === null) {
+      return array;
+    }
+    array.push(head.value);
+    return this.findValues(head.nextNode, array);
   }
 }
 
@@ -175,4 +190,4 @@ test.set('sita', 'stephen');
 test.set('teacher', 'james');
 test.set('fruit', 'apple');
 test.set('greeting', 'hello')
-console.log(test.keys());
+console.log(test.values());
