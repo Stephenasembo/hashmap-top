@@ -145,6 +145,21 @@ class Hashmap {
     head = lead;
     return this.traverseNodes(head, lead);
   }
+  keys() {
+    let filledSpots = this.findFilledSpots();
+    let keysArray = [];
+    for (let spot of filledSpots) {
+      keysArray = this.findKeys(this.array[spot], keysArray);
+    }
+    return keysArray;
+  }
+  findKeys(head, array) {
+    if (head === null) {
+      return array;
+    }
+    array.push(head.key);
+    return this.findKeys(head.nextNode, array);
+  }
 }
 
 function Node(key, value, node = null) {
@@ -159,6 +174,5 @@ test.set('rama', 'mark');
 test.set('sita', 'stephen');
 test.set('teacher', 'james');
 test.set('fruit', 'apple');
-console.log(test.length());
-test.clear();
-console.log(test.length());
+test.set('greeting', 'hello')
+console.log(test.keys());
