@@ -65,6 +65,17 @@ class Hashmap {
     }
     return this.find(node.nextNode, key)
   }
+  has(key) {
+    let hashCode = this.hash(key);
+    if(this.array[hashCode]) {
+      let foundNode = this.find(this.array[hashCode], key);
+      if (foundNode) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
 }
 
 function Node(key, value, node = null) {
@@ -78,4 +89,4 @@ const test = new Hashmap();
 test.set('rama', 'mark');
 test.set('sita', 'stephen');
 test.set('teacher', 'james')
-console.log(test.get('student'));
+console.log(test.has('teacher'));
