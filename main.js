@@ -44,6 +44,27 @@ class Hashmap {
     }
     this.findLastNode(node.nextNode);
   }
+  get(key) {
+    let hashCode = this.hash(key);
+    if (this.array[hashCode]) {
+      let foundNode = this.find(this.array[hashCode], key);
+      if (foundNode) {
+        return foundNode.value;
+      }
+      return null;
+    }
+    return null;
+  }
+  // Traverse the linked list looking for a key match
+  find(node, key) {
+    if (node === null) {
+      return null;
+    }
+    if (node.key === key) {
+      return node;
+    }
+    return this.find(node.nextNode, key)
+  }
 }
 
 function Node(key, value, node = null) {
@@ -55,5 +76,6 @@ function Node(key, value, node = null) {
 }
 const test = new Hashmap();
 test.set('rama', 'mark');
-test.set('sita', 'stephen')
-console.log(test.array);
+test.set('sita', 'stephen');
+test.set('teacher', 'james')
+console.log(test.get('student'));
