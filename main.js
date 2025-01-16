@@ -175,6 +175,23 @@ class Hashmap {
     array.push(head.value);
     return this.findValues(head.nextNode, array);
   }
+  entries() {
+    let filledSpots = this.findFilledSpots();
+    let entriesArray = [];
+    let keysArray = this.keys();
+    for (let key of keysArray) {
+      for (let spot of filledSpots) {
+        let foundNode = this.find(this.array[spot], key);
+        if (foundNode) {
+          let keyEntry = foundNode.key;
+          let valueEntry = foundNode.value;
+          let pairArray = [keyEntry, valueEntry];
+          entriesArray.push(pairArray);
+        }
+      }
+    }
+    return entriesArray;
+  }
 }
 
 function Node(key, value, node = null) {
@@ -190,4 +207,4 @@ test.set('sita', 'stephen');
 test.set('teacher', 'james');
 test.set('fruit', 'apple');
 test.set('greeting', 'hello')
-console.log(test.values());
+console.log(test.entries());
