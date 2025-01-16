@@ -1,6 +1,6 @@
 class Hashmap {
   constructor() {
-    this.loadFactor = 0.75;
+    this.loadFactor = null;
     this.capacity = 16;
     this.array = [];
   }
@@ -33,6 +33,11 @@ class Hashmap {
           lastNode.nextNode = newNode;
         }
       }
+    }
+    this.loadFactor = this.length()/this.capacity;
+    if (this.loadFactor > 0.75) {
+      this.capacity = this.capacity * 2;
+      this.loadFactor = this.length()/this.capacity;
     }
   }
   findLastNode(node) {
@@ -202,9 +207,19 @@ function Node(key, value, node = null) {
   }
 }
 const test = new Hashmap();
-test.set('rama', 'mark');
-test.set('sita', 'stephen');
-test.set('teacher', 'james');
-test.set('fruit', 'apple');
-test.set('greeting', 'hello')
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+test.set('kite', 'green')
+test.set('moon', 'silver')
+test.set('student', 'stephen');
 console.log(test.entries());
