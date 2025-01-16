@@ -103,6 +103,29 @@ class Hashmap {
     }
     return this.findPrev(node.nextNode)
   }
+  length() {
+    let filledSpots = [];
+    for (let i = 0; i < this.capacity; i += 1) {
+      if (this.array[i] !== null && this.array[i] !== undefined) {
+        filledSpots.push(i);
+      }
+    }
+    let totalNodes = 0;
+    // Iterate through each filled spot of the array
+    for (let spot of filledSpots) {
+      let head = this.array[spot];
+      totalNodes += this.countNodes(head);
+    }
+    return totalNodes;
+  }
+  // Count the nodes present in the linked list
+  countNodes(head) {
+    if(head === null) {
+      return 0;
+    }
+    return 1 + this.countNodes(head.nextNode);
+  }
+
 }
 
 function Node(key, value, node = null) {
@@ -118,5 +141,5 @@ test.set('sita', 'stephen');
 test.set('teacher', 'james');
 test.set('fruit', 'apple');
 console.log(test);
-console.log(test.remove('fruit'));
-console.log(test);
+test.remove('sita');
+console.log(test.length());
