@@ -125,7 +125,28 @@ class Hashmap {
     }
     return 1 + this.countNodes(head.nextNode);
   }
-
+  clear() {
+    let filledSpots = [];
+    for (let i = 0; i < this.capacity; i += 1) {
+      if (this.array[i] !== null && this.array[i] !== undefined) {
+        filledSpots.push(i);
+      }
+    }
+  
+    for (let spot of filledSpots) {
+      let head = this.array[spot];
+      let currentPointer = head;
+      this.array[spot] = this.traverseNodes(head, currentPointer);
+    }
+  }
+  traverseNodes(head, lead) {
+    if (lead === null) {
+      return null;
+    }
+    lead = lead.nextNode;
+    head = lead;
+    return this.traverseNodes(head, lead);
+  }
 }
 
 function Node(key, value, node = null) {
@@ -141,5 +162,5 @@ test.set('sita', 'stephen');
 test.set('teacher', 'james');
 test.set('fruit', 'apple');
 console.log(test);
-test.remove('sita');
-console.log(test.length());
+test.clear();
+console.log(test);
