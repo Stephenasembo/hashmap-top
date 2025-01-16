@@ -29,6 +29,19 @@ class Hashmap {
     }
     return this.findLastNode(node.nextNode);
   }
+  has(key) {
+    let hashCode = this.hash(key);
+    if (this.array[hashCode]) {
+      return this.findKey(key, this.array[hashCode]);
+    }
+    return false;
+  }
+  findKey(key, node) {
+    if (node.key === key) {
+      return true;
+    }
+    return this.findKey(key, node = node.nextNode);
+  }
 }
 
 class Node {
@@ -42,4 +55,4 @@ const test = new Hashmap();
 test.set('student');
 test.set('rama');
 test.set('sita');
-console.log(test);
+console.log(test.has('sita'));
