@@ -12,11 +12,23 @@ class Hashmap {
     }
     return hashCode;
   }
+  set(key) {
+    let hashCode = this.hash(key);
+    let newNode = new Node(key);
+    // Check if spot is filled
+    if (!this.array[hashCode]) {
+      this.array[hashCode] = newNode;
+    }
+  }
 }
 
 class Node {
   constructor (key, node = null) {
     this.key = key;
-    this.node = node;
+    this.nextNode = node;
   }
 }
+
+const test = new Hashmap();
+test.set('student', 'Stephen');
+console.log(test);
