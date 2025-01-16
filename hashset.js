@@ -42,6 +42,29 @@ class Hashmap {
     }
     return this.findKey(key, node = node.nextNode);
   }
+  remove(key) {
+    let hashCode = this.hash(key);
+    if (this.array[hashCode]) {
+      if (this.array[hashCode].nextNode === null) {
+        this.array[hashCode] = null;
+        return true;
+      }
+      if (this.array[hashCode].key === key) {
+        this.array[hashCode] = this.array[hashCode].nextNode;
+        return true;
+      }
+      let prevNode = this.findPrevNode(key, this.array[hashCode]);
+      prevNode.nextNode = prevNode.nextNode.nextNode;
+      return true;
+    }
+    return false;
+  }
+  findPrevNode(key, node) {
+    if (node.nextNode.key === key) {
+      return node;
+    }
+    return this.findNode(key, node.nextNode);
+  }
 }
 
 class Node {
@@ -55,4 +78,5 @@ const test = new Hashmap();
 test.set('student');
 test.set('rama');
 test.set('sita');
-console.log(test.has('sita'));
+console.log(test.remove('rama'));
+console.log(test);
