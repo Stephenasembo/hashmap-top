@@ -76,6 +76,33 @@ class Hashmap {
     }
     return false;
   }
+  remove(key) {
+    let hashCode = this.hash(key);
+    if(this.array[hashCode]) {
+      let foundNode = this.find(this.array[hashCode], key);
+      if (foundNode) {
+        let prev = this.findPrev(this.array[hashCode], foundNode);
+        if (prev) {
+          prev.nextNode = foundNode.nextNode;
+          return true;
+        }
+        this.array[hashCode] = foundNode.nextNode;
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+  findPrev(node, next) {
+    // If the previous node is the head of the list
+    if (node === next) {
+      return null;
+    }
+    if (node.nextNode === next) {
+      return node;
+    }
+    return this.findPrev(node.nextNode)
+  }
 }
 
 function Node(key, value, node = null) {
@@ -88,5 +115,8 @@ function Node(key, value, node = null) {
 const test = new Hashmap();
 test.set('rama', 'mark');
 test.set('sita', 'stephen');
-test.set('teacher', 'james')
-console.log(test.has('teacher'));
+test.set('teacher', 'james');
+test.set('fruit', 'apple');
+console.log(test);
+console.log(test.remove('fruit'));
+console.log(test);
